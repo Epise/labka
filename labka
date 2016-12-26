@@ -1,0 +1,93 @@
+//Задание 1
+let odejda = ['Шляпа', 'Пальто', 'Носки 3 пары', 'Футболка', 'Рубашка', 
+              'Топ', 'Платье', 'Свитер', 'Юбка', 'Гольфы',
+              '2 перчатки', 'Брюки', 'Джинсы', 'Корсет', 'Блузка',
+              'Галстук', 'Пиджак', 'Ремень', 'Косуха', 'Бандана',
+              'Сапоги', 'Джемпер', 'Колготки', 'Майка', 'Болеро'];
+
+
+console.log('\t' + 'Задание №1:' + '\n');
+console.log('Одежда: \n');
+odejda.forEach(cloths => {
+  console.log(cloths);
+});
+
+
+//Задание 2
+
+let odejda2 = odejda.filter(i => (i >= 0041 && i <= 'Z') || (i >= 0061 && i <= 'z'));
+                 
+function filter (item) {
+	return (item >= 0041 && item <= 'Z' || item >= 0061 && item <= 'z');
+}
+
+
+//Задание 3
+
+var odejda3 = odejda.sort(Length);
+
+function Length(a, b) {
+	if (a.length > b.length) return -1;
+	else if (a.length < b.length) return 1;
+	else return 0;
+}
+
+//Задание 4.1
+
+console.log('\nДопустим, что дифтонг это буква "я". Выводим массив с дифтонгами:\n');
+  Array.prototype.incrementalSearch = function(s){
+  return this.filter(item => item.indexOf(s) >= 0);
+ };
+console.log(odejda = odejda.incrementalSearch('я'));
+
+//Задание 4.2
+
+function toSymbol(str) {
+  var arr = [];
+  for (let i = 0; i < str.length; i++) {
+    arr[i] = str.charCodeAt(i);
+  };
+  return arr;
+};
+
+var writersSymbols = [];
+odejda.forEach(cloths => {
+  var subodejdaSymbols = toSymbol(cloths);
+  writersSymbols.push(subodejdaSymbols);
+});
+
+console.log('\n' + '\t' +'Задание №4:');
+console.log('\n' + 'Массивы кодов символов для каждого элемента:' + '\n');
+odejdaSymbols.forEach(cloths => {
+  console.dir(cloths);
+});
+
+//Задание 5.1
+
+global.api.encrypt = function(array) {
+  let ans = [];
+  for(let i = 0; i < array.length; i++) {
+    let s = '';
+    for(let j = 0; j < array[i].length; j++) {
+      s += String.fromCharCode(array[i].charCodeAt(j) ^ 89);
+    }
+    ans.push(s);
+  }
+  return ans;
+}
+
+console.log('\nШифрование...\n');
+let encrypted = global.api.encrypt(odejda);
+console.log(JSON.stringify(encrypted) + '\n');
+console.log('\n...и дешифрование\n');
+console.log(JSON.stringify(global.api.encrypt(encrypted)) + '\n');
+
+// Задание 5.2
+
+Array.prototype.searchSubstring = function(s) {
+  return this.filter(item => item.indexOf(s) >= 0);
+};
+
+console.log('\n' + '\t' +'Задание №5:');
+console.log('\n' + 'Поиск строк в массиве по подстроке "Ко":' + '\n');
+console.log(odejda.searchSubstring('Ко'));
